@@ -1,0 +1,76 @@
+.article{
+    padding: 15px 14px 24px 19px;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 140px;
+    margin-top: 26px;
+    border-radius: 5px;
+    background-color: white;
+    filter: drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.15));
+}
+.titleLine{
+    display: flex;
+}
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+}
+.title{
+    color: #1890FF;
+    font-size: 20px;
+    line-height: 28px;
+}
+.likeContainer{
+    padding-left: 13px;
+    display: flex;
+    align-items: center;
+}
+.likeContainer span{
+    margin-left: 6px;
+}
+.authorContainer{
+    display: flex;
+}
+.avatar{
+    object-fit: cover;
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+}
+.data_name{
+  padding: 0 10px;
+}
+.name{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+}
+.data{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 22px;
+}
+.description{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 22px;
+}
+.tags{
+    flex-wrap: wrap;
+    display: flex;
+    margin: -4px;
+}
+.tag{
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    border-radius: 2px;
+    margin: 4px;
+    padding: 2px 6px;
+    font-size: 12px;
+    line-height: 15px;
+}
+.titleAndTags{
+    max-width: 66%;
+}

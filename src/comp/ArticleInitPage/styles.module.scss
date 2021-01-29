@@ -1,0 +1,109 @@
+.container{
+    background: #E5E5E5;
+    padding: 24px 5vw 0 5vw;
+    height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.header{
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    text-align: center;
+    color: #262626;
+    padding-bottom: 24px;
+    cursor: default;
+}
+.articleFormComponent{
+    width: 100%;
+    height: min-content;
+    flex-grow: 1;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    box-shadow: 0px 22px 106px rgba(0, 0, 0, 0.07), 0px 9.19107px 44.2843px rgba(0, 0, 0, 0.0503198), 0px 4.91399px 23.6765px rgba(0, 0, 0, 0.0417275), 0px 2.75474px 13.2728px rgba(0, 0, 0, 0.035), 0px 1.46302px 7.04911px rgba(0, 0, 0, 0.0282725), 0px 0.608796px 2.93329px rgba(0, 0, 0, 0.0196802);
+    border-radius: 6px;
+    padding: 48px 32px;
+    position: relative;
+}
+.sendButtonContainer{
+    display: flex;
+    justify-content: center;
+}
+.sendButton{
+    font-size: 16px;
+    line-height: 24px;
+    width: 100%;
+    height: 40px;
+}
+.newTag{
+    padding: 8px 12px;
+    outline: none;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    box-sizing: border-box;
+    border-radius: 4px;
+    transition: border 0.3s ease;
+    &:hover{
+      border: 1px solid#1890FF;  
+    }
+}
+.addTagButton{
+    padding: 8px 37px;
+    color: #1890FF;
+    border: 1px solid #1890FF;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+    background: #FFFFFF;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    &:hover{
+        background-color:  #1890FF;
+        color: #FFFFFF;
+    }
+}
+.deleteTagButton{
+    outline: none;
+    margin: 0 18px;
+    padding: 8px 37px;
+    background: #FFFFFF;
+    color: #F5222D;
+    border: 1px solid #F5222D;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    &:hover{
+        background-color:  #F5222D;
+        color: #FFFFFF;
+    }
+}
+.TagForm{
+    margin-bottom: 19px;
+}
+.tag{
+    padding: 8px 12px;
+    width: 185px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    text-align: center;
+    margin: 0;
+    vertical-align: baseline;
+    font-size: 16px;
+    line-height: 24px;
+}
+.tagContainer{
+    display: flex;
+    margin-bottom: 5px;
+}

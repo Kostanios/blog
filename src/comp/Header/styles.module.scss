@@ -1,0 +1,125 @@
+.blog{
+    color: black;
+}
+.headerComponent{
+    padding: 16px 22px 13px 22px;
+    height: 80px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+}
+.buttonGroup{
+    align-items: center;
+    display: flex;
+}
+.inButton{
+    outline: none;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    width: 84px;
+    height: 35px;
+    background: transparent;
+    border: 0;
+    color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+    &:hover{
+        transition: color 0.3s ease;
+        color: rgba(0, 0, 0, 0.45);
+    }
+}
+.upButton{
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    width: 109px;
+    height: 51px;
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: transparent;
+    color: #52C41A;
+    font-size: 18px;
+    cursor: pointer;
+    &:hover{
+        border-color: #ffffff;
+        transition: background-color 0.3s ease;
+        background-color: #52C41A;
+        color: #FFFFFF;
+    }
+}
+.blog{
+    cursor: pointer;
+}
+.createButton{
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    width: 112px;
+    height: 31px;
+    border: 1px solid #52C41A;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: transparent;
+    color: #52C41A;
+    font-size: 14px;
+    line-height: 22px;
+    cursor: pointer;
+    &:hover{
+        border-color: #ffffff;
+        transition: background-color 0.3s ease;
+        background-color: #52C41A;
+        color: #FFFFFF;
+    }
+}
+.logoutButton{
+    outline: none;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    width: 109px;
+    height: 51px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    color: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover{
+        transition: color 0.3s ease, border 0.3s ease;
+        color: rgba(0, 0, 0, 0.45);
+        border: 1px solid rgba(0, 0, 0, 0.45);
+    }
+}
+.author{
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+}
+.profileContainer{
+    padding: 0 25px;
+}
+.author{
+    margin-right: 13px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    color: rgba(0, 0, 0, 0.85);
+    &:hover{
+        transition: color 0.3s ease;
+        color: rgba(0, 0, 0, 0.45);
+    }
+}
+.profileLink{
+    cursor: default;
+}
+.avatar{
+    object-fit: cover;
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    cursor: pointer;
+}
