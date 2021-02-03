@@ -3,21 +3,27 @@ import {
 } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { REGISTRATION } from '../../const/path';
-import { loginThunk } from '../../redux/slices/authSlice';
+import { REGISTRATION } from 'const/path';
+import { loginThunk } from 'redux/slices/authSlice';
 import styles from './styles.module.scss';
 
 const Login = () => {
   const context = useSelector((state) => state);
   const history = useHistory();
   const dispatch = useDispatch();
+  const [serverError, setServerError] = useState(false);
   useEffect(() => {
     if (context.auth.errors === null && context.auth.currentUser !== null) { history.push('/'); }
+    if (context.auth.errors !== null) {
+      setServerError(true);
+    }
   }, [context.auth.errors, context.auth.currentUser]);
   const onFinish = (values) => {
-    dispatch(loginThunk(values));
+    if (!serverError && !context.auth.isLoading) {
+      dispatch(loginThunk(values));
+    }
     // console.log('Success:', values);
   };
 
@@ -49,8 +55,8 @@ const Login = () => {
             ]}
         >
             <div className={styles.inputContainer}>
-                <span>Email address</span>
-                <Input placeholder={'Email address'}/>
+                <label htmlFor='email'>Email address</label>
+                <Input required id='email' onChange={() => { setServerError(false); }} placeholder={'Email address'}/>
             </div>
         </Form.Item>
 
@@ -64,8 +70,8 @@ const Login = () => {
             ]}
         >
             <div className={styles.inputContainer}>
-                <span>Password</span>
-                <Input.Password placeholder={'Password'}/>
+                <label htmlFor='password'>Password</label>
+                <Input.Password required id='password' onChange={() => { setServerError(false); }} placeholder={'Password'}/>
             </div>
         </Form.Item>
         <Form.Item>

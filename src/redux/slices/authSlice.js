@@ -1,31 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import registration from '../../api/Registration';
-import login from '../../api/Login';
-import getUser from '../../api/getUser';
-import updateUser from '../../api/updateUser';
+import authAPI from 'api/Auth';
 import { deleteCookie } from '../../util/deleteCookie';
 import {
   REGISTRATION, LOG_IN, GET_USER, CLEAR_AUTH_ERRORS, LOG_OUT, UPDATE_USER,
 } from '../../const/reducers';
 
 export const registrationThunk = createAsyncThunk(REGISTRATION, async (user) => {
-  const authUserStatus = registration(user);
+  const authUserStatus = await authAPI.registration(user);
   return authUserStatus;
 });
 
 export const loginThunk = createAsyncThunk(LOG_IN, async (user) => {
-  const authUserStatus = login(user);
+  const authUserStatus = await authAPI.login(user);
   return authUserStatus;
 });
 
 export const getUserThunk = createAsyncThunk(GET_USER, async () => {
-  const authUserStatus = getUser();
+  const authUserStatus = await authAPI.getUser();
   return authUserStatus;
 });
 
 export const updateUserThunk = createAsyncThunk(UPDATE_USER, async (newUser) => {
-  const authUserStatus = updateUser(newUser);
+  const authUserStatus = await authAPI.updateUser(newUser);
   return authUserStatus;
 });
 

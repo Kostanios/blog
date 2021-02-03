@@ -4,6 +4,7 @@ export const SET_VIEW_ARTICLE = 'setViewArticle';
 export const CREATE_ARTICLE = 'createArticle';
 export const UPDATE_ARTICLE = 'updateArticle';
 export const DELETE_ARTICLE = 'deleteArticle';
+export const CLEAR_DATA_ERRORS = 'clearDataErrors';
 
 export const REGISTRATION = 'registration';
 export const LOG_IN = 'login';

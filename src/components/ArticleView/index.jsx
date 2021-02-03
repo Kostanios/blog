@@ -1,14 +1,15 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useSelector, useDispatch } from 'react-redux';
 import dateFormat from 'dateformat/lib/dateformat';
-import { useHistory } from 'react-router-dom';
 import md from 'markdown';
 import { useState } from 'react';
-import { deleteArticleThunk } from '../../redux/slices/dataSlice';
 
+import ArticleInitPage from 'components/ArticleInitPage';
+import { deleteArticleThunk, likeArticleThunk } from 'redux/slices/dataSlice';
+import Like from 'assets/SVG/Like.svg';
+import FavoriteLike from 'assets/SVG/FavoriteLike.svg';
+import User from 'assets/SVG/User.svg';
 import styles from './styles.module.scss';
-import Like from '../../assets/SVG/Like.svg';
-import User from '../../assets/SVG/User.svg';
-import ArticleInitPage from '../ArticleInitPage';
 
 const { markdown } = md;
 
@@ -16,15 +17,12 @@ const ArticleView = () => {
   const dispatch = useDispatch();
   const context = useSelector((state) => state);
   const [sure, setSure] = useState(false);
-  const history = useHistory();
   const [editMode, setEditMode] = useState(false);
-  if (context.data.viewArticle === null) {
-    history.push('/');
-    return null;
-  }
+  const [favorite, setFavorite] = useState(context.data.viewArticle.favorited);
+  const [likeCount, setLikeCount] = useState(context.data.viewArticle.favoritesCount);
   const currentUsername = context.auth.currentUser ? context.auth.currentUser.username : '';
-  return !editMode
-    ? <div className={styles.container}>
+  if (!editMode) {
+    return <div className={styles.container}>
     <div className={styles.ArticleView}>
       <div className={styles.headerContainer}>
         <div>
@@ -33,12 +31,18 @@ const ArticleView = () => {
                     {context.data.viewArticle.title}
                 </header>
                 <div className={styles.likeContainer}>
-                    <img src={Like} alt=''/>
-                    <span>{context.data.viewArticle.favoritesCount >= 0 ? context.data.viewArticle.favoritesCount : ''}</span>
+                    <img onClick={() => {
+                      if (!favorite) {
+                        setFavorite(true);
+                        setLikeCount(likeCount + 1);
+                      }
+                      dispatch(likeArticleThunk(context.data.viewArticle.slug));
+                    }} src={ favorite ? FavoriteLike : Like} alt=''/>
+                    <span>{context.data.viewArticle.favoritesCount >= 0 ? likeCount : ''}</span>
                 </div>
             </div>
             <div className={styles.tags}>
-              {context.data.viewArticle.tagList.map((tagName) => <div className={styles.tag}>{`${tagName}`}</div>)}
+              {context.data.viewArticle.tagList.map((tagName) => <div key={tagName} className={styles.tag}>{`${tagName}`}</div>)}
             </div>
         </div>
         <div className={styles.authorContainer}>
@@ -61,7 +65,8 @@ const ArticleView = () => {
       <div className={styles.descriptionAndButtons}>
         <p className={styles.description}
         dangerouslySetInnerHTML={{ __html: markdown.toHTML(context.data.viewArticle.description) }}
-        ></p> {context.data.viewArticle.author.username !== currentUsername
+        ></p>
+        {context.data.viewArticle.author.username !== currentUsername
           ? null
           : <div className={styles.buttons}>
               <button
@@ -97,7 +102,8 @@ const ArticleView = () => {
         dangerouslySetInnerHTML={{ __html: markdown.toHTML(context.data.viewArticle.body) }}
       ></p>
   </div>
-  </div>
-    : <ArticleInitPage slug={context.data.viewArticle.slug} />;
+  </div>;
+  }
+  return <ArticleInitPage slug={context.data.viewArticle.slug} />;
 };
 export default ArticleView;

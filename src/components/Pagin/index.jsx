@@ -1,8 +1,8 @@
 import { Pagination } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './styles.module.scss';
 
-import { setPage } from '../../redux/slices/dataSlice';
+import { setPage } from 'redux/slices/dataSlice';
+import styles from './styles.module.scss';
 
 const Pagin = () => {
   const dispatch = useDispatch();

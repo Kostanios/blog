@@ -4,18 +4,18 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 // import { CacheSwitch } from 'react-router-cache-route';
 
-import styles from './styles.module.scss';
-import Header from '../Header';
-import Collection from '../Collection';
-import ArticleView from '../ArticleView';
-import Regist from '../Regist';
-import Login from '../Login';
-import Profile from '../PROFILE';
-import ArticleInitPage from '../ArticleInitPage';
+import Header from 'components/Header';
+import Collection from 'components/Collection';
+import ArticleView from 'components/ArticleView';
+import ProfilePrivateRoute from 'routes/ProfilePrivateRoute';
+import ArticleInitPagePrivateRoute from 'routes/ArticleInitPagePrivateRoute';
+import Regist from 'components/Regist';
+import Login from 'components/Login';
+import { getUserThunk } from 'redux/slices/authSlice';
 import {
-  ARTICLE, REGISTRATION, LOG_IN, PROFILE, ARTICLE_INIT_PAGE,
-} from '../../const/path';
-import { getUserThunk } from '../../redux/slices/authSlice';
+  ARTICLE, REGISTRATION, LOG_IN,
+} from 'const/path';
+import styles from './styles.module.scss';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -30,8 +30,8 @@ const MainPage = () => {
             <Route path={`${ARTICLE}/:slug`} component={ArticleView} />
             <Route path={`${REGISTRATION}`} component={Regist} />
             <Route path={`${LOG_IN}`} component={Login}/>
-            <Route path={`${PROFILE}/:username`} component={Profile}/>
-            <Route path={`${ARTICLE_INIT_PAGE}/:username`} component={ArticleInitPage}/>
+            <ProfilePrivateRoute/>
+            <ArticleInitPagePrivateRoute/>
         </Switch>
     </Router>
 </div>;

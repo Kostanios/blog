@@ -1,7 +1,7 @@
 import { base } from './const';
 
-async function createArticle(parameters) {
-  console.log(parameters.article, '-', parameters.slug);
+async function updateArticle(parameters) {
+  // console.log(parameters.article, '-', parameters.slug);
   const articles = fetch(`${base}/articles/${parameters.slug}`, {
     method: 'PUT',
     headers: {
@@ -13,4 +13,4 @@ async function createArticle(parameters) {
   return articles;
 }
 
-export default createArticle;
+export default updateArticle;

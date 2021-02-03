@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { Alert } from 'antd';
 
-import User from '../../assets/SVG/User.svg';
-import { clearAuthErrors, logOut } from '../../redux/slices/authSlice';
-import styles from './styles.module.scss';
+import User from 'assets/SVG/User.svg';
+import { clearAuthErrors, logOut } from 'redux/slices/authSlice';
+import { clearDataErrors } from 'redux/slices/dataSlice';
 import {
   REGISTRATION, LOG_IN, PROFILE, ARTICLE_INIT_PAGE,
-} from '../../const/path';
+} from 'const/path';
+import { NOT_AUTHORIZET } from 'const/errors';
+import styles from './styles.module.scss';
 
 const Header = () => {
   const context = useSelector((state) => state);
@@ -17,9 +20,10 @@ const Header = () => {
         {
         context.auth.currentUser === null
           ? <>
-            <Link to={`${LOG_IN}`}><button className={styles.inButton}>Sign In</button></Link>
-            <Link to={`${REGISTRATION}`}><button className={styles.upButton}>Sign Up</button></Link>
-        </>
+              { context.data.errors === NOT_AUTHORIZET ? <Alert className={styles.alert} message="Log in to like and leave the article" type="error" showIcon /> : null}
+              <Link to={`${LOG_IN}`}><button onClick={() => { dispatch(clearDataErrors()); }} className={styles.inButton}>Sign In</button></Link>
+              <Link to={`${REGISTRATION}`}><button onClick={() => { dispatch(clearDataErrors()); }} className={styles.upButton}>Sign Up</button></Link>
+            </>
           : <>
         <Link
           to={`${ARTICLE_INIT_PAGE}/${context.auth.currentUser.username}`}

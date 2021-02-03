@@ -1,10 +1,7 @@
 import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
 
-import getArticles from '../../api/getArticles';
-import createArticle from '../../api/createArticle';
-import updateArticle from '../../api/updateArticle';
-import deleteArticle from '../../api/deleteArticle';
-import likeArticle from '../../api/like';
+import dataAPI from 'api/Data';
+import { NOT_AUTHORIZET } from '../../const/errors';
 
 import {
   GET_ARTICLES,
@@ -13,31 +10,31 @@ import {
   UPDATE_ARTICLE,
   DELETE_ARTICLE,
   LIKE_ARTICLE,
+  CLEAR_DATA_ERRORS,
 } from '../../const/reducers';
 
 export const getArticlesThunk = createAsyncThunk(GET_ARTICLES, async (page) => {
-  const data = await getArticles(page);
+  const data = await dataAPI.getArticles(page);
   return data;
 });
 
 export const createArticleThunk = createAsyncThunk(CREATE_ARTICLE, async (article) => {
-  const data = await createArticle(article);
+  const data = await dataAPI.createArticle(article);
   return data;
 });
 
 export const updateArticleThunk = createAsyncThunk(UPDATE_ARTICLE, async (parameters) => {
-  console.log(parameters.slug);
-  const data = await updateArticle(parameters);
+  const data = await dataAPI.updateArticle(parameters);
   return data;
 });
 
 export const deleteArticleThunk = createAsyncThunk(DELETE_ARTICLE, async (slug) => {
-  const res = await deleteArticle(slug);
+  const res = await dataAPI.deleteArticle(slug);
   return res;
 });
 
 export const likeArticleThunk = createAsyncThunk(LIKE_ARTICLE, async (slug) => {
-  const res = await likeArticle(slug);
+  const res = await dataAPI.likeArticle(slug);
   return res;
 });
 
@@ -52,6 +49,9 @@ export const dataSlice = createSlice({
     errors: null,
   },
   reducers: {
+    [CLEAR_DATA_ERRORS]: (state) => {
+      state.errors = null;
+    },
     [SET_PAGE]: (state, action) => {
       state.page = action.payload.page;
     },
@@ -70,6 +70,7 @@ export const dataSlice = createSlice({
         state.articles = action.payload.articles;
         state.totalPages = action.payload.articlesCount;
         state.isLoading = false;
+        state.errors = null;
         // console.log(state.articles);
       }
     },
@@ -108,7 +109,6 @@ export const dataSlice = createSlice({
         state.viewArticle = null;
         state.errors = null;
       }
-      state.isLoading = false;
     },
     [deleteArticleThunk.rejected]: (state, action) => {
       console.warn(action.error);
@@ -125,9 +125,13 @@ export const dataSlice = createSlice({
       stateCopy[articleIndex].favorited = true;
       state.articles = stateCopy;
     },
+    [likeArticleThunk.rejected]: (state, action) => {
+      state.errors = NOT_AUTHORIZET;
+      console.warn(action.error);
+    },
   },
 });
 
-export const { setPage, setViewArticle } = dataSlice.actions;
+export const { setPage, setViewArticle, clearDataErrors } = dataSlice.actions;
 
 export default dataSlice.reducer;

@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
 
 import './App.scss';
-import MainPage from './comp/MainPage';
+import MainPage from 'components/MainPage/index';
 import store from './redux/store';
 
 function App() {

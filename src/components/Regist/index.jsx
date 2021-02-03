@@ -9,9 +9,9 @@ import {
 } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 
-import { registrationThunk } from '../../redux/slices/authSlice';
+import { registrationThunk } from 'redux/slices/authSlice';
+import { LOG_IN } from 'const/path';
 import styles from './styles.module.scss';
-import { LOG_IN } from '../../const/path';
 
 const Regist = () => {
   const history = useHistory();
@@ -19,14 +19,20 @@ const Regist = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({});
+  const [serverError, setServerError] = useState(false);
   useEffect(() => {
     forceUpdate({});
   }, []);
   useEffect(() => {
     if (context.auth.errors === null && context.auth.currentUser !== null) { history.push('/'); }
+    if (context.auth.errors !== null) {
+      setServerError(true);
+    }
   }, [context.auth.errors, context.auth.currentUser]);
   const onFinish = (values) => {
-    dispatch(registrationThunk(values));
+    if (!serverError && !context.auth.isLoading) {
+      dispatch(registrationThunk(values));
+    }
     // console.log('Finish:', values);
   };
   return <div className={styles.registrContainer}>
@@ -57,8 +63,8 @@ const Regist = () => {
         ]}
       >
         <div className={styles.inputContainer}>
-            <label className={styles.inputLabel}>username</label>
-            <Input placeholder={'Username'}/>
+            <label htmlFor='user' className={styles.inputLabel}>username</label>
+            <Input readOnly onFocus={(e) => { e.target.removeAttribute('readonly'); }} type='text' id='user' onChange={() => { setServerError(false); }} placeholder={'Username'}/>
         </div>
       </Form.Item>
       <Form.Item
@@ -75,8 +81,8 @@ const Regist = () => {
         ]}
       >
         <div className={styles.inputContainer}>
-          <label>E-mail</label>
-          <Input placeholder={'E-mail'}/>
+          <label htmlFor='email'>E-mail</label>
+          <Input readOnly onFocus={(e) => { e.target.removeAttribute('readonly'); }} id='email' type='email' onChange={() => { setServerError(false); }} placeholder={'E-mail'}/>
         </div>
       </Form.Item>
       <Form.Item
@@ -98,8 +104,8 @@ const Regist = () => {
         hasFeedback
       >
         <div className={styles.inputContainer}>
-          <label className={styles.inputLabel}>Password</label>
-          <Input.Password placeholder={'Password'}/>
+          <label htmlFor='password' className={styles.inputLabel}>Password</label>
+          <Input.Password readOnly onFocus={(e) => { e.target.removeAttribute('readonly'); }} id='password' onChange={() => { setServerError(false); }} placeholder={'Password'}/>
         </div>
       </Form.Item>
       <Form.Item
@@ -124,7 +130,7 @@ const Regist = () => {
       >
         <div className={styles.inputContainer}>
             <label className={styles.inputLabel}>Confirm</label>
-            <Input.Password placeholder={'Confirm Password'}/>
+            <Input.Password readOnly onFocus={(e) => { e.target.removeAttribute('readonly'); }} placeholder={'Confirm Password'}/>
         </div>
       </Form.Item>
       <Form.Item

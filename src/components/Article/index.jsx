@@ -4,12 +4,12 @@ import dateFormat from 'dateformat/lib/dateformat';
 import { useDispatch } from 'react-redux';
 import md from 'markdown';
 
+import FavoriteLike from 'assets/SVG/FavoriteLike.svg';
+import Like from 'assets/SVG/Like.svg';
+import User from 'assets/SVG/User.svg';
+import { setViewArticle, likeArticleThunk } from 'redux/slices/dataSlice';
+import { ARTICLE } from 'const/path';
 import styles from './styles.module.scss';
-import FavoriteLike from '../../assets/SVG/FavoriteLike.svg';
-import Like from '../../assets/SVG/Like.svg';
-import User from '../../assets/SVG/User.svg';
-import { setViewArticle, likeArticleThunk } from '../../redux/slices/dataSlice';
-import { ARTICLE } from '../../const/path';
 
 const { markdown } = md;
 

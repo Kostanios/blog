@@ -41,7 +41,8 @@
     "rules": {
       "linebreak-style": "off",
       "import/prefer-default-export": "off",
-      "no-param-reassign": "off"
+      "no-param-reassign": "off",
+      "import/no-unresolved": "off"
     }
   },
   "browserslist": {

@@ -1,6 +1,6 @@
 import { base } from './const';
 
-async function like(slug) {
+async function likeArticle(slug) {
   const likeStatus = fetch(`${base}/articles/${slug}/favorite`, {
     method: 'POST',
     headers: {
@@ -10,4 +10,4 @@ async function like(slug) {
   return likeStatus;
 }
 
-export default like;
+export default likeArticle;

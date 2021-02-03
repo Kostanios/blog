@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { updateUserThunk } from '../../redux/slices/authSlice';
+import { updateUserThunk } from 'redux/slices/authSlice';
 import styles from './styles.module.scss';
 
 const Profile = () => {
@@ -30,6 +30,8 @@ const Profile = () => {
       setUsername(context.auth.currentUser.username);
       setEmail(context.auth.currentUser.email);
       setUrl(context.auth.currentUser.image ? context.auth.currentUser.image : '');
+    } else {
+      history.push('/');
     }
   }, [context.auth.currentUser]);
   const onFinish = (values) => {
@@ -69,8 +71,9 @@ const Profile = () => {
         ]}
       >
         <div className={styles.inputContainer}>
-            <label className={styles.inputLabel}>Username</label>
+            <label htmlFor='username' className={styles.inputLabel}>Username</label>
             <Input
+              id='username'
               value={usename}
               onChange={(event) => { setUsername(event.target.value); }}
               placeholder={'Username'}
@@ -93,8 +96,9 @@ const Profile = () => {
          ]}
       >
         <div className={styles.inputContainer}>
-          <label>Email address</label>
+          <label htmlFor='email'>Email address</label>
           <Input
+           id='email'
            value={email}
            onChange={(event) => { setEmail(event.target.value); }}
            placeholder={'E-mail'}/>
@@ -116,8 +120,9 @@ const Profile = () => {
         hasFeedback
       >
         <div className={styles.inputContainer}>
-          <label className={styles.inputLabel}>New password</label>
+          <label htmlFor='password' className={styles.inputLabel}>New password</label>
           <Input
+           id='password'
            value={`${password}`}
            autoComplete='false'
            onChange={(event) => { setPassword(event.target.value); }}
@@ -146,12 +151,13 @@ const Profile = () => {
         ]}
       >
         <div className={styles.inputContainer}>
-            <label className={styles.inputLabel}>Avatar image (url)</label>
+            <label htmlFor='url' className={styles.inputLabel}>Avatar image (url)</label>
             <img
               onError={(event) => { if (event.target.value !== '') { setUrlConfirm('error'); } }}
               onLoad={() => { setUrlConfirm('success'); }}
               className={styles.img} src={url || null} alt=''/>
             <Input
+              id='url'
               src={url || null}
               value={url}
               onChange={(event) => {
