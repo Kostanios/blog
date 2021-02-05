@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
 import { REGISTRATION } from 'const/path';
-import { loginThunk } from 'redux/slices/authSlice';
+import { loginThunk, clearAuthErrors } from 'redux/slices/authSlice';
+import { clearDataErrors } from 'redux/slices/dataSlice';
 import styles from './styles.module.scss';
 
 const Login = () => {
@@ -75,13 +76,14 @@ const Login = () => {
             </div>
         </Form.Item>
         <Form.Item>
-            <Button className={styles.loginButton} type="primary" htmlType="submit">
+            <Button className={ !context.auth.isLoading ? styles.loginButton : styles.disableLoginButton} type="primary" htmlType="submit">
             Login
             </Button>
         </Form.Item>
         </Form>
         <div className={styles.questionContainer}>
-          <span className={styles.question}>Don’t have an account?</span><Link to={`${REGISTRATION}`}>Sign Up.</Link>
+          <span className={styles.question}>Don’t have an account?</span>
+          <Link onClick={() => { dispatch(clearDataErrors()); dispatch(clearAuthErrors()); }} to={`${REGISTRATION}`}>Sign Up.</Link>
         </div>
         <div className={styles.errorContainer}>
           <span className={styles.error}>{ !context.auth.errors ? null : 'email or password is invalid'}</span>

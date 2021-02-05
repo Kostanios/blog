@@ -1,4 +1,4 @@
-import getCookie from 'util/getCookie';
+import getToken from 'util/getToken';
 import { base } from './const';
 
 class Auth {
@@ -34,7 +34,7 @@ class Auth {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
     }).then((data) => data.json());
     return user;
@@ -45,7 +45,7 @@ class Auth {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
       body: JSON.stringify({ user: newUser }),
     }).then((data) => data.json());

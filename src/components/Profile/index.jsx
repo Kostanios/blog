@@ -140,8 +140,7 @@ const Profile = () => {
         }
         rules={[
           {
-            validator: (_, value) => {
-              console.log(value);
+            validator: () => {
               if (urlConfirm === 'success' || urlConfirm === null) {
                 return Promise.resolve();
               }

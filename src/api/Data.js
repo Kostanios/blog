@@ -1,4 +1,4 @@
-import getCookie from 'util/getCookie';
+import getToken from 'util/getToken';
 import { base } from './const';
 
 class Data {
@@ -14,7 +14,7 @@ class Data {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
-          Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+          Authorization: getToken(),
         },
       }).then((data) => data.json());
     } else {
@@ -28,7 +28,7 @@ class Data {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
       body: JSON.stringify({ article }),
     }).then((data) => data.json());
@@ -41,7 +41,7 @@ class Data {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
       body: JSON.stringify({ article: parameters.article }),
     }).then((data) => data.json());
@@ -52,7 +52,7 @@ class Data {
     const articles = fetch(`${this.base}/articles/${slug}`, {
       method: 'DELETE',
       headers: {
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
     }).then((data) => data.json());
     return articles;
@@ -62,7 +62,7 @@ class Data {
     const likeStatus = fetch(`${this.base}/articles/${slug}/favorite`, {
       method: 'POST',
       headers: {
-        Authorization: `Token ${getCookie('Token').replace(/Token=[A-z0-9.]*/g, ((str) => str.slice(6)))}`,
+        Authorization: getToken(),
       },
     }).then((data) => data.json());
     return likeStatus;

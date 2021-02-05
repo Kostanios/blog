@@ -1,0 +1,23 @@
+.authorContainer{
+    display: flex;
+}
+.data_name{
+    padding: 0 10px;
+  }
+.name{
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 700;
+}
+.data{
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    line-height: 22px;
+}
+.avatar{
+object-fit: cover;
+width: 46px;
+height: 46px;
+border-radius: 23px;
+}

@@ -91,7 +91,6 @@ export const dataSlice = createSlice({
     },
     [updateArticleThunk.fulfilled]: (state, action) => {
       if (action.payload.errors) {
-        console.log(action);
         state.errors = action.payload;
       } else {
         state.errors = null;
@@ -103,7 +102,6 @@ export const dataSlice = createSlice({
     },
     [deleteArticleThunk.fulfilled]: (state, action) => {
       if (action.payload.errors) {
-        console.log(action);
         state.errors = action.payload;
       } else {
         state.viewArticle = null;

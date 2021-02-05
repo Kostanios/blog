@@ -9,7 +9,8 @@ import {
 } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 
-import { registrationThunk } from 'redux/slices/authSlice';
+import { registrationThunk, clearAuthErrors } from 'redux/slices/authSlice';
+import { clearDataErrors } from 'redux/slices/dataSlice';
 import { LOG_IN } from 'const/path';
 import styles from './styles.module.scss';
 
@@ -151,13 +152,16 @@ const Regist = () => {
       </Form.Item>
       <Form.Item>
         <div className={styles.regButtonContainer}>
-            <Button className={styles.createButton} type="primary" htmlType="submit">
+            <Button className={!context.auth.isLoading ? styles.createButton : styles.disableCreateButton} type="primary" htmlType="submit">
              Create
             </Button>
         </div>
       </Form.Item>
     </Form>
-    <div className={styles.questionContainer}><span className={styles.question}>Already have an account?</span><Link to={`${LOG_IN}`}>Sign In.</Link></div>
+    <div className={styles.questionContainer}>
+      <span className={styles.question}>Already have an account?</span>
+      <Link onClick={() => { dispatch(clearDataErrors()); dispatch(clearAuthErrors()); }} to={`${LOG_IN}`}>Sign In.</Link>
+    </div>
     <div className={styles.errorContainer}>
           <span className={styles.error}>{ !context.auth.errors ? null : 'account with this email or usename exists'}</span>
     </div>

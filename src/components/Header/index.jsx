@@ -15,14 +15,26 @@ const Header = () => {
   const context = useSelector((state) => state);
   const dispatch = useDispatch();
   return <div className={styles.headerComponent}>
-    <Link onClick={() => { dispatch(clearAuthErrors()); }} to='/'><header className={styles.blog}>Realworld Blog</header></Link>
+    <Link onClick={() => { dispatch(clearAuthErrors()); dispatch(clearDataErrors()); }} to='/'><header className={styles.blog}>Realworld Blog</header></Link>
     <div className={styles.buttonGroup}>
         {
         context.auth.currentUser === null
           ? <>
               { context.data.errors === NOT_AUTHORIZET ? <Alert className={styles.alert} message="Log in to like and leave the article" type="error" showIcon /> : null}
-              <Link to={`${LOG_IN}`}><button onClick={() => { dispatch(clearDataErrors()); }} className={styles.inButton}>Sign In</button></Link>
-              <Link to={`${REGISTRATION}`}><button onClick={() => { dispatch(clearDataErrors()); }} className={styles.upButton}>Sign Up</button></Link>
+              <Link to={`${LOG_IN}`}>
+                <button
+                  onClick={() => { dispatch(clearAuthErrors()); dispatch(clearDataErrors()); }}
+                  className={styles.inButton}>
+                    Sign In
+                </button>
+              </Link>
+              <Link to={`${REGISTRATION}`}>
+                <button
+                  onClick={() => { dispatch(clearDataErrors()); dispatch(clearAuthErrors()); }}
+                  className={styles.upButton}>
+                    Sign Up
+                  </button>
+              </Link>
             </>
           : <>
         <Link
@@ -31,6 +43,7 @@ const Header = () => {
             <button className={styles.createButton}>Create article</button>
         </Link>
         <Link
+          onClick={() => { dispatch(clearDataErrors()); dispatch(clearAuthErrors()); }}
           className={styles.profileLink}
           to={`${PROFILE}/${context.auth.currentUser.username}`}>
           <div className={styles.profileContainer}>
